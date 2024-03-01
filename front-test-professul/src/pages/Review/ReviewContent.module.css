@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.profName{
+  font-size: 35px;
+  font-weight: 700;
+}
+
+.button1{
+  background-color: #375d78;
+  border: none;
+  color: #ffffff;
+  margin: 5px;
+}
+
+.button2{
+  background-color: #ffffff;
+  border: 1px solid #375d78;
+  color: #375d78;
+  margin: 5px;
+}
+
+.textRight {
+  text-align: right;
+}
+
+.border {
+  font-Size: 30px;
+  font-Weight: border;
+}
+
+.flex1 { 
+  flex: 1; /* 너비 비율 일정하게 */
+}
