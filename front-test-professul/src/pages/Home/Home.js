@@ -37,8 +37,7 @@ const Home = () => {
           <br />
 
           <div className={style["searchbar"]}>
-            <input
-              type="select"
+            <select
               name="type"
               value={selectedOption}
               onChange={handleSelectChange}
@@ -50,7 +49,7 @@ const Home = () => {
                   {option.label}
                 </option>
               ))}
-            </input>
+            </select>
             <input
               type="text"
               placeholder="검색어를 입력하세요"
