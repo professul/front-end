@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./ProfList.css";
+import style from "./ProfList.module.css";
 
 import "primeicons/primeicons.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
@@ -26,9 +26,9 @@ const ProfList = () => {
     }
   ];
   return (
-    <div className={style.listTable}>
+    <div>
       <p className={style.center}>'ㅇㅇㅇ' 검색결과 00건</p>
-      <div>
+      <div  className={`${style.listTable} ${style.marginCenter}`}>
       <DataTable value={searchList}>
         <Column field="이름" header="이름"></Column>
         <Column field="학교" header="학교"></Column>
