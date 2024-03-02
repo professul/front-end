@@ -6,6 +6,11 @@
   margin: 0 auto;
 }
 
+.container2 {
+  width: 70%;
+  margin: 0 auto;
+}
+
 .profName{
   font-size: 35px;
   font-weight: 700;
@@ -36,4 +41,46 @@
 
 .flex1 { 
   flex: 1; /* 너비 비율 일정하게 */
+}
+
+.reviewContainer {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.reviewArea {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.scoreArea {
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+}
+
+.score {
+  background-color: #357d786b;
+  display: inline-block;
+  text-align: center;
+  width: 64px;
+  height: 64px;
+  line-height: 64px;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.contentArea{
+  display: inline-block;
+  width: 80%;
+  margin-top: 0;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }

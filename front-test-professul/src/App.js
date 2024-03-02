@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import ProfList from "./pages/List/ProfList";
 import ReviewContent from "./pages/Review/ReviewContent";
+import Rate from "./pages/Review/Rate";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route exact path="/professor" element={<ProfList />} />
         <Route exact path="/professor/review" element={<ReviewContent />} />
+        <Route exact path="/rating" element={<Rate />} />
       </Routes>
     </div>
   );
