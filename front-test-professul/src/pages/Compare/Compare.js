@@ -53,11 +53,11 @@ const Compare = () => {
     <div className={style.container}>
       <div className={style.substance}>
         <div className={style.content}>
-          <div className={style.title}>
-            {ProfList[0].이름}<br/>
+            <div className={style.profName}>{ProfList[0].이름}</div>
             <span className={style.univ}>{ProfList[0].학교}</span>
             <span className={style.dept}>{ProfList[0]['학과/학부']}</span>
-          </div>
+        </div>
+        <div className={style.content}>
           <div><span className={style.result}>{ProfList[0].평점}</span>점</div>
         </div>
         <div className={style.content}>
