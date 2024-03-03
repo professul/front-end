@@ -10,6 +10,7 @@ import LoginForm from "./pages/Login/Login";
 import MypageHeader from "./pages/MyPages/MypageHeader";
 import ReviewManagementTab from "./pages/MyPages/ReviewManagementTab";
 import UserInfoTab from "./pages/MyPages/UserInfoTab";
+import AdminPage from "./pages/Admin/Admin";
 function App() {
   return (
     <div className="App">
@@ -20,6 +21,7 @@ function App() {
 
         <Route path="/mypage/*" element={<MypageHeader />} />
 
+        <Route exact path="/admin" element={<AdminPage />} />
         <Route exact path="/professor" element={<ProfList />} />
         <Route exact path="/professor/review" element={<ReviewContent />} />
       </Routes>
