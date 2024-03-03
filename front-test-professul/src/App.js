@@ -7,7 +7,9 @@ import ProfList from "./pages/List/ProfList";
 import ReviewContent from "./pages/Review/ReviewContent";
 import SignUp from "./pages/SignUp/Signup";
 import LoginForm from "./pages/Login/Login";
-
+import MypageHeader from "./pages/MyPages/MypageHeader";
+import ReviewManagementTab from "./pages/MyPages/ReviewManagementTab";
+import UserInfoTab from "./pages/MyPages/UserInfoTab";
 function App() {
   return (
     <div className="App">
@@ -15,6 +17,9 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route exact path="/signup" element={<SignUp />} />
         <Route exact path="/login" element={<LoginForm />} />
+
+        <Route path="/mypage/*" element={<MypageHeader />} />
+
         <Route exact path="/professor" element={<ProfList />} />
         <Route exact path="/professor/review" element={<ReviewContent />} />
       </Routes>
