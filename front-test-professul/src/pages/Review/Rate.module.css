@@ -1,8 +1,13 @@
+.container {
+  width: 70%;
+  margin: 0 auto;
+}
+
 .qArea {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  margin-bottom: 20px;
+  margin: 20px;
 }
 
 .question {
@@ -26,5 +31,5 @@
   background-color: #375d78;
   border: none;
   color: #ffffff;
-  margin: 5px;
+  margin: 20px;
 }
