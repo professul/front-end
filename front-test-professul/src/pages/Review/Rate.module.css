@@ -1,0 +1,35 @@
+.container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.qArea {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 20px;
+}
+
+.question {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.selectProf {
+  width: 10rem;
+  height: 2.5rem;
+  border-radius: 6px;
+  border-color: #d1d5db;
+}
+
+.reviewBox {
+  height: 200px;
+  width: 600px;
+}
+
+.submit{
+  background-color: #375d78;
+  border: none;
+  color: #ffffff;
+  margin: 20px;
+}

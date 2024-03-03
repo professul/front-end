@@ -5,6 +5,9 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import ProfList from "./pages/List/ProfList";
 import ReviewContent from "./pages/Review/ReviewContent";
+import Rate from "./pages/Review/Rate";
+import Compare from "./pages/Compare/Compare";
+
 import SignUp from "./pages/SignUp/Signup";
 import LoginForm from "./pages/Login/Login";
 import MypageHeader from "./pages/MyPages/MypageHeader";
@@ -24,6 +27,8 @@ function App() {
         <Route exact path="/admin" element={<AdminPage />} />
         <Route exact path="/professor" element={<ProfList />} />
         <Route exact path="/professor/review" element={<ReviewContent />} />
+        <Route exact path="/rating" element={<Rate />} />
+        <Route exact path="/professor/compare" element={<Compare />} />
       </Routes>
     </div>
   );
