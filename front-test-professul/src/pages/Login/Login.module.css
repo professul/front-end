@@ -1,0 +1,81 @@
+* {
+  box-sizing: border-box;
+}
+
+div {
+  display: block;
+}
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.surface-card {
+  width: 500px;
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03), 0 0 2px rgba(0, 0, 0, 0.06),
+    0 2px 6px rgba(0, 0, 0, 0.12) !important;
+}
+.first-welcome {
+  margin-bottom: 2rem;
+  text-align: center;
+  align-items: center;
+}
+.welcome {
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.account {
+  font-weight: 500;
+  line-height: 1.5;
+  color: #495057;
+  text-align: center;
+}
+
+.createLink {
+  font-weight: 500;
+  text-decoration: none;
+  color: #3b82f6;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  text-align: center;
+}
+.label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem !important;
+  font-weight: 500;
+  color: #212121;
+}
+.email,
+.password {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.checkbox-container {
+  margin-bottom: 3rem;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+.checkbox {
+  align-items: center;
+  display: flex;
+  margin-right: 0.5rem;
+}
+.forgot {
+  cursor: pointer;
+  margin-left: 0.5rem;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: right;
+  color: #3b82f6;
+}
+.signInButton {
+  width: 100%;
+  border: 1px solid #375d78;
+  background-color: #375d78;
+}
