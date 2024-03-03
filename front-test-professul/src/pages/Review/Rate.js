@@ -6,11 +6,9 @@ import "primeicons/primeicons.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
 
-import { InputText } from "primereact/inputtext";
 import { SelectButton } from 'primereact/selectbutton';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
-import { Dropdown } from 'primereact/dropdown';
 
 const professor = [
   { label: '김연수', value: '김연수' },
@@ -66,7 +64,7 @@ const Rate = () => {
   };
 
   return (
-    <div>
+    <div className={style.container}>
       <div className={style.qArea}>
         <label htmlFor="profName" className={style.question}>교수명</label>
         <select
