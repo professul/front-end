@@ -6,11 +6,13 @@ import style from "./Login.module.css";
 import "primereact/resources/primereact.min.css"; //core css
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
 import { loginUser } from "../../redux/actions";
 import { login, url } from "../../api/config";
 import { setCookie } from "../../api/cookie";
 
+import { useNavigate } from "react-router-dom";
+
+// import { useNavigate, useNavigation } from "react-router-dom";
 const LoginForm = () => {
   const [values, setValues] = useState({
     email: "",
@@ -18,13 +20,15 @@ const LoginForm = () => {
   });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 관리하는 상태
 
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
   const isLoading = useSelector((state) => state.auth.loading); // 로딩 상태
   const error = useSelector((state) => state.auth.error); // 에러 상태
   const dispatch = useDispatch(); // useDispatch 훅을 사용하여 디스패치 함수를 가져옴.
+
+  const navigate = useNavigate();
+
   const handleChange = async (e) => {
     setValues({ ...values, [e.target.id]: e.target.value });
   };
@@ -45,20 +49,29 @@ const LoginForm = () => {
         },
         { withCredentials: true }
       )
-      .then((response) => {
+      .then(async (response) => {
         // 서버 응답 처리
-        console.log(response);
-        const { access, refresh } = response.headers; // 서버에서 응답으로 받은 헤더에서 토큰 추출
+        console.log("여기가 response", response);
+
+        // const { access, refresh } = response.headers; // 서버에서 응답으로 받은 헤더에서 토큰 추출
         if (response.status === 200) {
           const accessToken = response.headers["access"]; // 액세스 토큰을 헤더에서 추출
           const refreshToken = response.headers["refresh"]; // 리프레시 토큰을 헤더에서 추출
+          const { userId, email, role } = response.data;
 
           dispatch({ type: "isLogin", payload: true });
-          dispatch({ type: "user", payload: response.data.user });
-          dispatch({ type: "access", payload: accessToken });
-          dispatch({ type: "refresh", payload: refreshToken });
+          dispatch({ type: "user", payload: { userId, email, role } });
 
+          dispatch({ type: "access", payload: accessToken });
+
+          // dispatch({ type: "refresh", payload: refreshToken });
+
+          //토큰 저장
           setCookie("refresh", refreshToken);
+
+          setIsLoggedIn(true); // 로그인 상태를 true로 설정
+
+          console.log("로그인 성공");
         } else {
           throw new Error("Network response was not ok");
         }
@@ -67,6 +80,10 @@ const LoginForm = () => {
         console.error("로그인 실패", error);
       });
   };
+  if (isLoggedIn) {
+    navigate("/"); // 홈페이지로 리다이렉트
+    return null; // 리다이렉션 후 렌더링할 컴포넌트가 없으므로 null 반환
+  }
 
   return (
     <div className={style["form-container"]}>

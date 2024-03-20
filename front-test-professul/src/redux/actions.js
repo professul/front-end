@@ -30,3 +30,8 @@ export const loginUser = (email, password) => {
     }
   };
 };
+
+export const setUserInfoAction = (userInfo) => ({
+  type: "SET_USER_INFO",
+  payload: userInfo,
+});
