@@ -12,22 +12,3 @@ const user = {
 };
 
 export default user;
-
-// export const userSlice = createSlice({
-//   name: "user",
-//   initialState: {
-//     email: "",
-//     password: "",
-//     name: "",
-//   },
-
-//   reducers: {
-//     login: (state, action) => {
-//       state.email = action.payload;
-//       state.password = action.payload;
-//     },
-//     logout: (state) => {
-//       state.user = null;
-//     },
-//   },
-// });

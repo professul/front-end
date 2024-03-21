@@ -8,6 +8,8 @@ import { Dialog } from "primereact/dialog";
 import { Divider } from "primereact/divider";
 import { classNames } from "primereact/utils";
 import style from "./Signup.module.css";
+import axios from "axios";
+import { url } from "../../api/config";
 
 const SignUp = () => {
   const [showMessage, setShowMessage] = useState(false);
@@ -39,11 +41,23 @@ const SignUp = () => {
     return errors;
   };
 
-  const onSubmit = (data, form) => {
-    setFormData(data);
-    setShowMessage(true);
+  const onSubmit = async (data, form) => {
+    try {
+      // 회원가입 데이터
+      const signUpData = {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      };
 
-    form.restart();
+      // 서버에 회원가입 요청 보내기
+      const response = await axios.post(`${url}/join`, signUpData);
+
+      setShowMessage(true);
+      form.restart();
+    } catch (error) {
+      console.error("회원가입 실패:", error);
+    }
   };
 
   const isFormFieldValid = (meta) => !!(meta.touched && meta.error);
@@ -95,9 +109,8 @@ const SignUp = () => {
           ></i>
           <h5>Registration Successful!</h5>
           <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
-            Your account is registered under name <b>{formData.name}</b> ; it'll
-            be valid next 30 days without activation. Please check{" "}
-            <b>{formData.email}</b> for activation instructions.
+            <b>{formData.name}</b>님, 회원가입을 진심으로 축하드립니다! 계정이
+            성공적으로 생성되었습니다. 서비스를 자유롭게 이용해 주세요.
           </p>
         </div>
       </Dialog>

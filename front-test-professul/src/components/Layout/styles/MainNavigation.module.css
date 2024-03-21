@@ -1,0 +1,59 @@
+/* Flexbox와 관련된 스타일 */
+.flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.gap-2 {
+  gap: 8px; /* Tailwind의 gap-2는 대략 8px에 해당 */
+}
+
+/* 너비 관련 스타일 */
+.w-8rem {
+  width: 8rem;
+}
+
+/* 반응형 너비는 미디어 쿼리를 통해 설정 가능 */
+@media (min-width: 640px) {
+  .sm\:w-auto {
+    width: auto;
+  }
+}
+
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.border-1 {
+  border: 1px solid;
+}
+
+.surface-border {
+  border-color: #e5e5e5; /* 예시 색상, 실제 프로젝트에 맞게 조정 필요 */
+}
+
+.border-round {
+  border-radius: 0.25rem;
+}
+
+.surface-100 {
+  background-color: #f5f5f5; /* 예시 색상, 실제 프로젝트에 맞게 조정 필요 */
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.p-1 {
+  padding: 0.25rem;
+}
+
+/* 기타 필요한 스타일 추가 */

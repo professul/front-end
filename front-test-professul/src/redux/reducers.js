@@ -1,28 +1,60 @@
-import { createReducer } from "@reduxjs/toolkit";
-import user from "./user";
-import { loginStart, loginSuccess, loginFailure, logout } from "./actions";
+import { createSlice } from "@reduxjs/toolkit";
 
-const authReducer = createReducer(user, (builder) => {
-  builder
-    .addCase(loginStart, (state) => {
+export const TOKEN_TIME_OUT = 600 * 1000;
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState: {
+    loading: false,
+    error: null,
+    isLoggedIn: false,
+    user: null,
+    accessToken: null, // 액세스 토큰
+    refreshToken: null, // 리프레시 토큰
+    accessTokenExpireTime: null, // 액세스 토큰 만료 시간
+  },
+  reducers: {
+    loginStart: (state) => {
       state.loading = true;
       state.error = null;
-    })
-    .addCase(loginSuccess, (state, action) => {
+    },
+    loginSuccess: (state, action) => {
       state.loading = false;
       state.isLoggedIn = true;
-      state.token = action.payload.token; // 토큰 값 저장
-      state.user = action.payload; // 사용자 정보 저장
-    })
-    .addCase(loginFailure, (state, action) => {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+      state.user = action.payload.user;
+    },
+    loginFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    })
-    .addCase(logout, (state) => {
+    },
+    logout: (state) => {
       state.isLoggedIn = false;
-      state.user = null; // 사용자 정보 삭제
-      state.token = null; // 토큰 값 삭제
-    });
+      state.user = null;
+      state.accessToken = null;
+      state.refreshToken = null;
+      state.accessTokenExpireTime = null;
+    },
+    SET_TOKEN: (state, action) => {
+      state.accessToken = action.payload.accessToken;
+      state.accessTokenExpireTime = new Date().getTime() + TOKEN_TIME_OUT;
+    },
+    DELETE_TOKEN: (state) => {
+      state.accessToken = null;
+      state.refreshToken = null;
+      state.accessTokenExpireTime = null;
+    },
+  },
 });
 
-export default authReducer;
+export const {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+  logout,
+  SET_TOKEN,
+  DELETE_TOKEN,
+} = authSlice.actions;
+
+export default authSlice.reducer;

@@ -7,9 +7,9 @@
 * {
   box-sizing: border-box;
 }
-div {
+/* div {
   display: block;
-}
+} */
 .form-demo .card form {
   margin-top: 2rem;
 }
@@ -37,6 +37,7 @@ div {
 }
 
 .card {
+  margin-top: 5em;
   width: 500px;
   /* margin-top: 2rem; */
   padding: 1.5rem;
