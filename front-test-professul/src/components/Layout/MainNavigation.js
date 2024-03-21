@@ -3,17 +3,18 @@ import { Menubar } from "primereact/menubar";
 import { InputText } from "primereact/inputtext";
 import { Badge } from "primereact/badge";
 import { Avatar } from "primereact/avatar";
-
-export default function TemplateDemo() {
+import style from "./MainNavigation.module.css";
+export default function MainHeader() {
   const itemRenderer = (item) => (
-    <a className="flex align-items-center p-menuitem-link">
+    // <a className="flex align-items-center p-menuitem-link">
+    <a className={style["card2"]}>
       <span className={item.icon} />
-      <span className="mx-2">{item.label}</span>
-      {item.badge && <Badge className="ml-auto" value={item.badge} />}
+      <span className={style["custom-label"]}>{item.label}</span>
+      {item.badge && (
+        <Badge className={style["custom-badge"]} value={item.badge} />
+      )}
       {item.shortcut && (
-        <span className="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">
-          {item.shortcut}
-        </span>
+        <span className={style["custom-span"]}>{item.shortcut}</span>
       )}
     </a>
   );
@@ -88,21 +89,17 @@ export default function TemplateDemo() {
     ></img>
   );
   const end = (
-    <div className="flex align-items-center gap-2">
+    <div className={style["custom-end"]}>
       <InputText
         placeholder="Search"
         type="text"
         className="w-8rem sm:w-auto"
       />
-      <Avatar
-        image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
-        shape="circle"
-      />
     </div>
   );
 
   return (
-    <div className="card">
+    <div className={style["card"]}>
       <Menubar model={items} start={start} end={end} />
     </div>
   );

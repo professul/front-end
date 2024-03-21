@@ -1,0 +1,28 @@
+.card2 {
+  display: flex;
+  align-items: center;
+  color: #333;
+  padding: 8px;
+  text-decoration: none;
+}
+
+.custom-label {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.custom-span {
+  margin-left: auto;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  padding: 4px;
+}
+.custom-badge {
+  margin-left: auto;
+}
+
+.custom-end {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
