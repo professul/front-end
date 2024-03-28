@@ -29,6 +29,7 @@
 .card {
   margin-top: 5em;
   width: 500px;
+  /* margin-top: 2rem; */
   padding: 1.5rem;
 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03), 0 0 2px rgba(0, 0, 0, 0.06),
@@ -42,4 +43,8 @@
   background-color: #375d78;
   border: none;
   padding: auto;
+}
+
+.field {
+  margin-bottom: 2rem;
 }

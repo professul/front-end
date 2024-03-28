@@ -1,22 +1,31 @@
+:root {
+  --main-bg-color: #315d78;
+  --btn-border-radius: 20px;
+}
+
 .card2 {
   display: flex;
   align-items: center;
-  color: #333;
   padding: 8px;
   text-decoration: none;
 }
 
-.custom-label {
+.custom-label,
+.custom-span,
+.custom-badge,
+.custom-end {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
+
 .custom-span {
   margin-left: auto;
-  border: 1px solid #cccccc;
+  border: 1px solid white;
   border-radius: 4px;
   font-size: 0.75rem;
   padding: 4px;
 }
+
 .custom-badge {
   margin-left: auto;
 }
@@ -25,4 +34,37 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.custom-menubar {
+  background-color: white;
+  border: none;
+}
+
+.nonMainPageMenubar {
+  background-color: var(--main-bg-color);
+}
+
+.loginButton,
+.logoutButton {
+  background: none;
+  color: #000000;
+  border: none;
+}
+
+.signUpButton,
+.myPageButton {
+  background-color: var(--main-bg-color);
+  border-color: var(--main-bg-color);
+  border-radius: var(--btn-border-radius);
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.loginButton {
+  margin-left: 10rem;
+}
+
+.logoutButton {
+  margin-right: 1.5rem;
 }

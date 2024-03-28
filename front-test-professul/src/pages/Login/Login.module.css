@@ -2,9 +2,6 @@
   box-sizing: border-box;
 }
 
-/* div {
-  display: block;
-} */
 .form-container {
   margin-top: 5em;
   display: flex;
