@@ -7,7 +7,6 @@ import "primereact/resources/primereact.min.css";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
-//폼 유효성 검사 추가하기
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +24,7 @@ const LoginForm = () => {
     setChecked(e.checked);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(loginUser({ email, password }));
   };
@@ -34,10 +33,10 @@ const LoginForm = () => {
     <div className={style["form-container"]}>
       <div className={style["surface-card"]}>
         <div className={style["first-welcome"]}>
-          <div className={style["welcome"]}>Welcome Back</div>
-          <span className={style["account"]}>Don't have an account?</span>
+          <div className={style["welcome"]}>환영합니다!</div>
+          <span className={style["account"]}>계정이 없으신가요?</span>
           <a className={style["createLink"]} href="/join">
-            Create today!
+            지금 가입하기!
           </a>
         </div>
         <div>
@@ -77,7 +76,7 @@ const LoginForm = () => {
             </div>
 
             <a className={style["forgot"]} href="/forgot-password">
-              Forgot your password?
+              비밀번호를 잊으셨나요?
             </a>
           </div>
 

@@ -2,17 +2,28 @@ import React from "react";
 import { TabView, TabPanel } from "primereact/tabview";
 import { Link } from "react-router-dom";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
+import { useSelector, useDispatch } from "react-redux";
 import style from "./UserInfoTab.module.css";
 const UserInfoTab = () => {
-  // 사용자 정보를 상태로 관리합니다.
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+  const userName = useSelector((state) => state.auth.user?.name);
+  console.log("이름", userName);
   const [userInfo, setUserInfo] = useState({
-    name: "John Doe",
-    email: "john.doe@example.com",
+    name: user?.name || "",
+    email: user?.email || "",
   });
+  console.log(userInfo);
+  useEffect(() => {
+    setUserInfo({
+      name: user?.name || "",
+      email: user?.email || "",
+    });
+  }, [user]); // user 상태가 변경될 때마다 실행
 
   // 사용자 정보를 변경하는 함수
   const handleUserInfoChange = (key, value) => {

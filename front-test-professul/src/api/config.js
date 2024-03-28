@@ -1,21 +1,38 @@
 import axios from "axios";
 
-export const url = "http://localhost:8080";
-
-const TOKEN_TYPE = localStorage.getItem("tokenType");
-let ACCESS_TOKEN = localStorage.getItem("access");
-
-export const AuthApi = axios.create({
-  baseURL: url,
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${ACCESS_TOKEN}`,
-  },
+const api = axios.create({
+  baseURL: "http://localhost:8080",
+  withCredentials: true, // 쿠키 전송을 위해 필요
 });
 
-export const login = async ({ email, password }) => {
-  const data = { email, password };
-  const response = await AuthApi.post(`/login`, data);
-  return response.data;
-};
-//config 세팅
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    // Access Token 만료 시
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        // Refresh Token으로 새로운 Access Token과 Refresh Token 요청
+        const { data } = await axios.post("/reissue", null, {
+          withCredentials: true,
+        });
+
+        // 새로운 토큰 저장
+        localStorage.setItem("accessToken", data.accessToken);
+        // 새로운 Refresh Token은 자동으로 Cookie에 저장됨
+
+        // 요청 재시도
+        return api.request(originalRequest);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+export default api;

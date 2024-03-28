@@ -9,7 +9,7 @@ import { Divider } from "primereact/divider";
 import { classNames } from "primereact/utils";
 import style from "./Signup.module.css";
 import axios from "axios";
-import { url } from "../../api/config";
+import api from "../../api/config";
 
 const SignUp = () => {
   const [showMessage, setShowMessage] = useState(false);
@@ -51,8 +51,7 @@ const SignUp = () => {
       };
 
       // 서버에 회원가입 요청 보내기
-      const response = await axios.post(`${url}/join`, signUpData);
-
+      const response = await api.post("/join", signUpData);
       setShowMessage(true);
       form.restart();
     } catch (error) {

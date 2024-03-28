@@ -12,7 +12,6 @@ const userReducer = (state = initialState, action) => {
         ...state,
         accessToken: action.payload,
       };
-    // 다른 액션 타입들에 대한 처리...
     default:
       return state;
   }
