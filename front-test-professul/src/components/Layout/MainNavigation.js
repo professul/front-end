@@ -14,7 +14,6 @@ export default function MainHeader() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const userName = useSelector((state) => state.auth.user?.name);
-  console.log(user);
   const isMainPage = location.pathname === "/";
   const items = isMainPage
     ? []

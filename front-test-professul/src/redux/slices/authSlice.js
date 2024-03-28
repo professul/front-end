@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { getCookie, removeCookie, setCookie } from "../../api/cookie";
-import { url } from "../../api/config";
 import api from "../../api/config";
+import { getCookie, removeCookie, setCookie } from "../../api/cookie";
+
 // 비동기 로그인 액션
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
@@ -33,7 +32,7 @@ export const loginUser = createAsyncThunk(
 
 export const refreshAccessToken = createAsyncThunk(
   "auth/refreshAccessToken",
-  async (_, { getState, rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     const refreshToken = getCookie("refresh"); // 또는 쿠키에서 리프레시 토큰을 가져옵니다.
     if (!refreshToken) {
       return rejectWithValue("No refresh token available");
@@ -47,10 +46,7 @@ export const refreshAccessToken = createAsyncThunk(
         return accessToken;
       }
     } catch (error) {
-      return rejectWithValue(
-        error.response.data.message ||
-          "토큰 갱신에 실패했습니다. 다시 로그인해주세요."
-      );
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -83,13 +79,13 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
-        // state.user = action.payload; //사용자 정보 저장
-        state.user = {
-          userId: action.payload.userId,
-          email: action.payload.email,
-          role: action.payload.role,
-          name: action.payload.name,
-        };
+        state.user = action.payload; //사용자 정보 저장
+        // state.user = {
+        //   userId: action.payload.userId,
+        //   email: action.payload.email,
+        //   role: action.payload.role,
+        //   name: action.payload.name,
+        // };
 
         state.accessToken = action.payload.accessToken;
         state.refreshToken = action.payload.refreshToken;
