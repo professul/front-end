@@ -10,13 +10,12 @@ const MypageHeader = () => {
 
   const handleTabChange = (e) => {
     setActiveIndex(e.index);
-    // 탭 인덱스에 따라 조건적으로 라우팅
     switch (e.index) {
       case 0:
-        navigate("/mypage/reviewManagement"); // 리뷰 관리 탭
+        navigate("/user/reviewManagement"); // 리뷰 관리 탭
         break;
       case 1:
-        navigate("/mypage/userInfo"); // 회원 정보 탭
+        navigate("/user/userInfo"); // 회원 정보 탭
         break;
       default:
         break;

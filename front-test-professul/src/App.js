@@ -1,6 +1,11 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 // import RootLayout from "./Root";
 import Layout from "./LayOut";
 
@@ -15,7 +20,10 @@ import MypageHeader from "./pages/MyPages/MypageHeader";
 import ReviewManagementTab from "./pages/MyPages/ReviewManagementTab";
 import UserInfoTab from "./pages/MyPages/UserInfoTab";
 import AdminPage from "./pages/Admin/Admin";
+import { checkUserRole } from "./util/checkUserRole";
 function App() {
+  const isAdmin = checkUserRole("ROLE_ADMIN");
+
   return (
     <div className="App">
       <Routes>
@@ -23,8 +31,11 @@ function App() {
           <Route index element={<Home />} />
           <Route path="join" element={<SignUp />} />
           <Route path="login" element={<LoginForm />} />
-          <Route path="mypage/*" element={<MypageHeader />} />
-          <Route path="admin" element={<AdminPage />} />
+          <Route path="user/*" element={<MypageHeader />} />
+          <Route
+            path="admin/*"
+            element={isAdmin ? <AdminPage /> : <Navigate to="/" replace />}
+          />
           <Route path="professor" element={<ProfList />} />
           <Route path="professor/review" element={<ReviewContent />} />
           <Route path="rating" element={<Rate />} />

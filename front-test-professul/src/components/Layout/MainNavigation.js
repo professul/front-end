@@ -8,16 +8,31 @@ import { useSelector, useDispatch } from "react-redux";
 import { handleLogout } from "../../util/logout";
 import { logout } from "../../redux/slices/authSlice";
 export default function MainHeader() {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.auth?.isLoggedIn);
+  const userRole = useSelector((state) => state.auth.user?.role);
+  console.log(userRole);
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const userName = useSelector((state) => state.auth.user?.name);
+  console.log(userName);
   const isMainPage = location.pathname === "/";
+
   const items = isMainPage
     ? []
     : [{ label: "Home", icon: "pi pi-home", url: "/" }]; // 메인 페이지가 아니면 홈 버튼만 표시
+
+  if (isLoggedIn && userRole === "ROLE_ADMIN") {
+    items.push({
+      label: "Admin",
+      icon: "pi pi-cog",
+      command: () => {
+        navigate("/admin");
+      },
+    });
+  }
+
   const handleLogoutClick = async () => {
     await handleLogout(dispatch);
     navigate("/");
@@ -34,7 +49,7 @@ export default function MainHeader() {
               label="마이페이지"
               icon="pi pi-user"
               className={style.myPageButton}
-              onClick={() => (window.location.href = "/mypage")}
+              onClick={() => (window.location.href = "/user")}
             />
             <Button
               label="로그아웃"
