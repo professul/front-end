@@ -34,13 +34,21 @@ export const refreshAccessToken = createAsyncThunk(
   "auth/refreshAccessToken",
   async (_, { rejectWithValue }) => {
     const refreshToken = getCookie("refresh"); // 또는 쿠키에서 리프레시 토큰을 가져옵니다.
+    console.log("refreshToken:", refreshToken);
     if (!refreshToken) {
+      console.error("No refresh token available");
+
       return rejectWithValue("No refresh token available");
     }
     try {
+      console.log("Sending refresh token request");
       const response = await api.post(`/reissue`, { refreshToken });
+      console.log("Response Status:", response.status); // 응답 상태 로그
+
       if (response.status === 200) {
         const accessToken = response.data.accessToken;
+        console.log("New Access Token:", accessToken); // 새로운 액세스 토큰 로그
+
         localStorage.setItem("access", accessToken); // 새로운 accessToken 저장
 
         return accessToken;
@@ -80,12 +88,6 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isLoggedIn = true;
         state.user = action.payload; //사용자 정보 저장
-        // state.user = {
-        //   userId: action.payload.userId,
-        //   email: action.payload.email,
-        //   role: action.payload.role,
-        //   name: action.payload.name,
-        // };
 
         state.accessToken = action.payload.accessToken;
         state.refreshToken = action.payload.refreshToken;
