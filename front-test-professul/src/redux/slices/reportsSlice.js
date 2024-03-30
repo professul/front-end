@@ -14,7 +14,7 @@ export const getReports = createAsyncThunk("reports/getReports", async () => {
 
   const config = {
     headers: {
-      access: `Bearer ${accessToken}`,
+      access: `${accessToken}`,
     },
   };
 
