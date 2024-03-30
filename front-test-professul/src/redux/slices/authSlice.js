@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/config";
+import axios from "axios";
 import { getCookie, removeCookie, setCookie } from "../../api/cookie";
 
 // 비동기 로그인 액션
@@ -11,15 +12,15 @@ export const loginUser = createAsyncThunk(
 
       if (response.status === 200) {
         //HTTP헤더에서 토큰 추출
-        const accessToken = response.headers["access"];
-        const refreshToken = response.headers["refresh"];
+        const access = response.headers["access"];
+        const refresh = response.headers["refresh"];
         const { userId, email, role, name } = response.data;
 
         //로컬 스토리지에 엑세스 토큰 저장
-        localStorage.setItem("access", accessToken);
-        setCookie("refresh", refreshToken);
+        localStorage.setItem("access", access);
+        setCookie("refresh", refresh);
         // 성공했을 때 사용자 정보 반환
-        return { userId, email, role, name, accessToken };
+        return { userId, email, role, name, access };
       }
     } catch (error) {
       return rejectWithValue(
