@@ -3,26 +3,41 @@ export const checkUserRole = (role) => {
   console.log("Provided Role", role);
   if (role !== "ROLE_USER" && role !== "ROLE_ADMIN") {
     console.error(
-      "Invalid role provided to checkUserRole. Only 'USER' or 'ADMIN' is allowed."
+      "Invalid role provided to checkUserRole. Only 'ROLE_USER' or 'ROLE_ADMIN' is allowed."
     );
     return false;
   }
-  console.log("Fetching data from localStorage...");
 
+  console.log("Fetching data from localStorage...");
   const loginDataString = localStorage.getItem("persist:root");
+  console.log("Retrieved data string:", loginDataString);
 
   // 로컬 스토리지에서 가져온 데이터 확인
   if (!loginDataString) {
     console.log("No data found in localStorage.");
     return false;
   }
-  const rootData = JSON.parse(loginDataString);
-  // 수정된 부분: 'auth' 객체를 먼저 파싱합니다.
+
+  let rootData;
+  try {
+    rootData = JSON.parse(loginDataString);
+  } catch (error) {
+    console.error("Error parsing loginDataString:", error);
+    return false; // 에러 발생 시 false 반환
+  }
+
   if (!rootData.auth) {
     console.log("No auth data found in rootData.");
     return false;
   }
-  const authData = JSON.parse(rootData.auth);
+
+  let authData;
+  try {
+    authData = JSON.parse(rootData.auth);
+  } catch (error) {
+    console.error("Error parsing auth data:", error);
+    return false; // 에러 발생 시 false 반환
+  }
 
   if (!authData.user) {
     console.log("No user data found in authData.");
@@ -30,7 +45,6 @@ export const checkUserRole = (role) => {
   }
 
   const user = authData.user;
-
   console.log("Final user data:", user);
 
   return user.role === role;
@@ -39,3 +53,4 @@ export const checkUserRole = (role) => {
 // 사용 예시
 const isUser = checkUserRole("ROLE_USER");
 const isAdmin = checkUserRole("ROLE_ADMIN");
+console.log(`Is User: ${isUser}, Is Admin: ${isAdmin}`);
