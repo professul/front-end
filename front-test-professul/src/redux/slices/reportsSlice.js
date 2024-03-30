@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/config";
+import axios from "axios";
 const initialState = {
   reports: [],
   selectedReports: null,
@@ -8,10 +9,17 @@ const initialState = {
 };
 
 export const getReports = createAsyncThunk("reports/getReports", async () => {
-  //서버에서 신고 데이터 가져오기
-  const response = await api.get("/admin");
-  const data = response.data; // Axios를 사용할 때 응답은 'data' 속성에 저장됩니다.
-  return data; // 필요한 데이터를 반환합니다.
+  const accessToken = localStorage.getItem("access");
+  console.log("여기 엑세스 토큰", localStorage.getItem("access"));
+
+  const config = {
+    headers: {
+      access: `Bearer ${accessToken}`,
+    },
+  };
+
+  const response = await axios.get("http://localhost:8080/admin", config);
+  return response.data;
 });
 
 //슬라이스 생성

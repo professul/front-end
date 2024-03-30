@@ -6,7 +6,6 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-// import RootLayout from "./Root";
 import Layout from "./LayOut";
 
 import Home from "./pages/Home/Home";
@@ -22,8 +21,6 @@ import UserInfoTab from "./pages/MyPages/UserInfoTab";
 import AdminPage from "./pages/Admin/Admin";
 import { checkUserRole } from "./util/checkUserRole";
 function App() {
-  const isAdmin = checkUserRole("ROLE_ADMIN");
-
   return (
     <div className="App">
       <Routes>
@@ -32,10 +29,8 @@ function App() {
           <Route path="join" element={<SignUp />} />
           <Route path="login" element={<LoginForm />} />
           <Route path="user/*" element={<MypageHeader />} />
-          <Route
-            path="admin/*"
-            element={isAdmin ? <AdminPage /> : <Navigate to="/" replace />}
-          />
+
+          <Route path="admin/*" element={<AdminPage />} />
           <Route path="professor" element={<ProfList />} />
           <Route path="professor/review" element={<ReviewContent />} />
           <Route path="rating" element={<Rate />} />

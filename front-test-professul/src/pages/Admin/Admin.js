@@ -15,7 +15,7 @@ const AdminPage = () => {
   );
   useEffect(() => {
     dispatch(getReports());
-  }, [dispatch]); // const [reports] = useState([
+  }, [dispatch]);
 
   // const [selectedReports, setSelectedReports] = useState(null); // 선택된 신고들을 관리할 상태
   const [rowClick, setRowClick] = useState(true); // 행 클릭 여부를 관리할 상태
