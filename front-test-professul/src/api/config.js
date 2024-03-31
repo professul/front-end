@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setAccessToken } from "../redux/slices/authSlice";
-
+import { useDispatch } from "react-redux"; // Redux의 useDispatch 함수를 import
 const api = axios.create({
   baseURL: "http://localhost:8080",
   withCredentials: true, // 쿠키 전송을 위해 필요
@@ -15,6 +15,7 @@ api.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       //토큰 만료
       originalRequest._retry = true;
+      const dispatch = useDispatch(); // useDispatch를 사용하여 dispatch 함수 가져오기
 
       try {
         // Refresh Token으로 새로운 Access Token과 Refresh Token 요청
