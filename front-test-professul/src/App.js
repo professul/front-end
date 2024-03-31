@@ -19,7 +19,10 @@ import MypageHeader from "./pages/MyPages/MypageHeader";
 import ReviewManagementTab from "./pages/MyPages/ReviewManagementTab";
 import UserInfoTab from "./pages/MyPages/UserInfoTab";
 import AdminPage from "./pages/Admin/Admin";
-import { checkUserRole } from "./util/checkUserRole";
+import PasswordCheckPage from "./pages/MyPages/PasswordCheckPage";
+import EditUserInfoPage from "./pages/MyPages/EditUserInfoPage";
+import ConfirmUserInfoPage from "./pages/MyPages/ConfirmUserInfoPage";
+
 function App() {
   return (
     <div className="App">
@@ -28,8 +31,13 @@ function App() {
           <Route index element={<Home />} />
           <Route path="join" element={<SignUp />} />
           <Route path="login" element={<LoginForm />} />
-          <Route path="user/*" element={<MypageHeader />} />
-
+          <Route path="user/*" element={<MypageHeader />}>
+            <Route path="reviewManagement" element={<ReviewManagementTab />} />
+            <Route path="userInfo" element={<UserInfoTab />} />
+          </Route>
+          <Route path="/password-check" element={<PasswordCheckPage />} />
+          <Route path="/edit-user-info" element={<EditUserInfoPage />} />
+          <Route path="/confirm-user-info" element={<ConfirmUserInfoPage />} />
           <Route path="admin/*" element={<AdminPage />} />
           <Route path="professor" element={<ProfList />} />
           <Route path="professor/review" element={<ReviewContent />} />

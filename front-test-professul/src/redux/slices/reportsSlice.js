@@ -10,15 +10,16 @@ const initialState = {
 
 export const getReports = createAsyncThunk("reports/getReports", async () => {
   const accessToken = localStorage.getItem("access");
-  console.log("여기 엑세스 토큰", localStorage.getItem("access"));
-
+  console.log(accessToken);
   const config = {
     headers: {
       access: `${accessToken}`,
     },
   };
 
-  const response = await axios.get("http://localhost:8080/admin", config);
+  const response = await api.get("/admin", config);
+
+  console.log("여기", response);
   return response.data;
 });
 

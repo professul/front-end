@@ -31,32 +31,18 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const refreshAccessToken = createAsyncThunk(
-  "auth/refreshAccessToken",
-  async (_, { rejectWithValue }) => {
-    const refreshToken = getCookie("refresh");
-    console.log("refreshToken:", refreshToken);
-    if (!refreshToken) {
-      console.error("No refresh token available");
-
-      return rejectWithValue("No refresh token available");
-    }
+export const updateUserInfo = createAsyncThunk(
+  "auth/updateUserInfo",
+  async (userInfo, { rejectWithValue }) => {
     try {
-      console.log("Sending refresh token request");
-      const response = await api.post(`/reissue`, { refreshToken });
-      console.log("Response Status:", response.status); // 응답 상태 로그
-
+      const response = await api.patch("/users", userInfo);
       if (response.status === 200) {
-        const accessToken = response.data.accessToken;
-        console.log("New Access Token:", accessToken); // 새로운 액세스 토큰 로그
-
-        localStorage.setItem("access", accessToken); // 새로운 accessToken 저장
-
-        return accessToken;
+        return response.data;
       }
     } catch (error) {
-      console.log("엑세스 토큰을 안함");
-      return rejectWithValue(error.response.data.message);
+      return rejectWithValue(
+        error.response.data.message || "회원정보 업데이트에 실패했습니다."
+      );
     }
   }
 );
@@ -73,6 +59,10 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    setAccessToken: (state, action) => {
+      state.accessToken = action.payload;
+    },
+
     //로그아웃 액션
     logout: (state) => {
       // 로그아웃 시 상태를 initialState로 초기화
@@ -99,16 +89,20 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(refreshAccessToken.fulfilled, (state, action) => {
-        state.accessToken = action.payload; //새로운 엑세스 토큰으로 상태 업데이트
-        state.isLoggedIn = true;
+      .addCase(updateUserInfo.pending, (state) => {
+        state.isLoading = true;
       })
-      .addCase(refreshAccessToken.rejected, (state, action) => {
+      .addCase(updateUserInfo.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload; // 업데이트된 사용자 정보로 상태 업데이트
+      })
+      .addCase(updateUserInfo.rejected, (state, action) => {
+        state.isLoading = false;
         state.error = action.payload;
       });
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { setAccessToken, logout } = authSlice.actions;
 
 export default authSlice.reducer;
