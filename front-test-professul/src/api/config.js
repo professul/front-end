@@ -26,7 +26,7 @@ api.interceptors.response.use(
         const accessToken = response.headers["access"];
         const refreshToken = response.headers["refresh"]; //이건 굳이 필요없음
         // 새로운 액세스 토큰으로 Redux 상태 업데이트
-        dispatch(setAccessToken(accessToken));
+        // dispatch(setAccessToken(accessToken)); //이거 내일 처리할것
 
         // 새로운 토큰 저장
         localStorage.setItem("access", accessToken);

@@ -10,7 +10,6 @@ const initialState = {
 
 export const getReports = createAsyncThunk("reports/getReports", async () => {
   const accessToken = localStorage.getItem("access");
-  console.log(accessToken);
   const config = {
     headers: {
       access: `${accessToken}`,
