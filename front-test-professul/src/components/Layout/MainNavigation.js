@@ -10,13 +10,11 @@ import { logout } from "../../redux/slices/authSlice";
 export default function MainHeader() {
   const isLoggedIn = useSelector((state) => state.auth?.isLoggedIn);
   const userRole = useSelector((state) => state.auth.user?.role);
-  console.log(userRole);
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const userName = useSelector((state) => state.auth.user?.name);
-  console.log(userName);
   const isMainPage = location.pathname === "/";
 
   const items = isMainPage
