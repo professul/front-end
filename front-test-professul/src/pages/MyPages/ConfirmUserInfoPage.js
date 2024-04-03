@@ -27,6 +27,10 @@ const ConfirmUserInfoPage = () => {
         <label htmlFor="email">이메일</label>
         <div>{user.email}</div>
       </div>
+      <div className={style["field"]}>
+        <label htmlFor="password">비밀번호</label>
+        <div>{user.password}</div>
+      </div>
       <div className={style["buttonContainer"]}>
         <Button label="완료" onClick={handleConfirm} />
         <Button label="수정" onClick={handleEdit} />

@@ -1,14 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/config";
-import axios from "axios";
 import { getCookie, removeCookie, setCookie } from "../../api/cookie";
-
+import {
+  login as loginApi,
+  updateUserInfo as updateUserInfoApi,
+} from "../../api/auth";
 // 비동기 로그인 액션
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await api.post(`/login`, { email, password });
+      const response = await loginApi(email, password);
 
       if (response.status === 200) {
         //HTTP헤더에서 토큰 추출
@@ -35,7 +37,7 @@ export const updateUserInfo = createAsyncThunk(
   "auth/updateUserInfo",
   async (userInfo, { rejectWithValue }) => {
     try {
-      const response = await api.patch("/users", userInfo);
+      const response = await updateUserInfoApi(userInfo);
       if (response.status === 200) {
         return response.data;
       }
@@ -80,7 +82,6 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isLoggedIn = true;
         state.user = action.payload; //사용자 정보 저장
-        // s
 
         state.accessToken = action.payload.accessToken;
         state.refreshToken = action.payload.refreshToken;

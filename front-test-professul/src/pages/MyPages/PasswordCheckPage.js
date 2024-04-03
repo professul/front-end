@@ -4,7 +4,7 @@ import { Button } from "primereact/button";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import style from "./PasswordCheckPage.module.css";
-
+import api from "../../api/config";
 const PasswordCheckPage = () => {
   const [password, setPassword] = useState("");
   const user = useSelector((state) => state.auth.user);
@@ -14,11 +14,26 @@ const PasswordCheckPage = () => {
     setPassword(e.target.value);
   };
 
-  const handlePasswordSubmit = () => {
-    if (password === user.password) {
-      navigate("/edit-user-info");
-    } else {
-      alert("비밀번호가 잘못되었습니다.");
+  const handlePasswordSubmit = async () => {
+    try {
+      const accessToken = localStorage.getItem("access");
+      const config = {
+        headers: {
+          access: `${accessToken}`,
+        },
+      };
+      const response = await api.post(
+        "user/checkPassword",
+        { password },
+        config
+      );
+      if (response.status === 200) {
+        navigate("/edit-user-info");
+      } else {
+        console.error("비밀번호 불일치");
+      }
+    } catch (error) {
+      console.error("비밀번호 확인 중 오류가 발생했습니다");
     }
   };
 
