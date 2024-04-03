@@ -19,6 +19,7 @@ const EditUserInfoPage = () => {
     setUserInfo({
       name: user.name,
       email: user.email,
+      password: user.password,
     });
   }, [user]);
 
@@ -52,13 +53,18 @@ const EditUserInfoPage = () => {
       </div>
       <div className={style["field"]}>
         <label htmlFor="email">이메일</label>
+        <InputText id="email" type="text" value={userInfo.email} disabled />
+      </div>
+      <div className={style["field"]}>
+        <label htmlFor="password">비밀번호</label>
         <InputText
-          id="email"
-          type="text"
-          value={userInfo.email}
-          onChange={(e) => handleUserInfoChange("email", e.target.value)}
+          id="password"
+          type="password"
+          value={userInfo.password}
+          onChange={(e) => handleUserInfoChange("password", e.target.value)}
         />
       </div>
+
       <div className={style["buttonContainer"]}>
         <Button label="저장" onClick={handleSaveUserInfo} />
         <Button label="취소" onClick={handleCancel} />

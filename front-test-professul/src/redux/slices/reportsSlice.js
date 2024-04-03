@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/config";
-import axios from "axios";
 const initialState = {
   reports: [],
   selectedReports: null,
@@ -9,17 +8,7 @@ const initialState = {
 };
 
 export const getReports = createAsyncThunk("reports/getReports", async () => {
-  const accessToken = localStorage.getItem("access");
-  const config = {
-    headers: {
-      access: `${accessToken}`,
-    },
-  };
-
-  const response = await api.get("/admin", config);
-
-  console.log("여기", response);
-  return response.data;
+  const response = await api.get("/admin");
 });
 
 //슬라이스 생성
