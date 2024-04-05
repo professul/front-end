@@ -14,7 +14,7 @@ ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         {" "}
-        {/* PersistGate를 추가하여 앱이 rehydrate될 때까지 렌더링을 지연시킵니다. */}
+        {/* PersistGate를 추가하여 앱이 rehydrate될 때까지 렌더링을 지연시킴. */}
         <BrowserRouter>
           <App />
         </BrowserRouter>

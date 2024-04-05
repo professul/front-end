@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
+// import { GetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./slices/authSlice";
 import reportsReducer from "./slices/reportsSlice";
@@ -9,8 +10,8 @@ const rootReducer = combineReducers({
 });
 
 const persistConfig = {
-  key: "root",
-  storage,
+  key: "root", //localStorage Key
+  storage, //local storage
   whilelist: ["auth"],
 };
 

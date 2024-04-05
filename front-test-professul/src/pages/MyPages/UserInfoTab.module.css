@@ -9,6 +9,14 @@
   display: flex;
   margin-bottom: 0.5rem;
 }
+.field label,
+.field div {
+  flex-basis: 40%;
+}
+
+.field div {
+  flex-basis: 70%;
+}
 
 .field label {
   width: 100%;
