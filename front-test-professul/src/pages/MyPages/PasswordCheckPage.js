@@ -16,17 +16,7 @@ const PasswordCheckPage = () => {
 
   const handlePasswordSubmit = async () => {
     try {
-      const accessToken = localStorage.getItem("access");
-      const config = {
-        headers: {
-          access: `${accessToken}`,
-        },
-      };
-      const response = await api.post(
-        "user/checkPassword",
-        { password },
-        config
-      );
+      const response = await api.post("user/checkPassword", { password });
       if (response.status === 200) {
         navigate("/edit-user-info");
       } else {

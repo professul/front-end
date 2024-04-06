@@ -40,11 +40,12 @@ const EditUserInfoPage = () => {
   };
 
   return (
-    <div className={style["container"]}>
+    <div className={style["cardContainer"]}>
       <h2>회원정보 변경</h2>
       <div className={style["field"]}>
         <label htmlFor="name">이름</label>
         <InputText
+          style={{ width: "100%" }}
           id="name"
           type="text"
           value={userInfo.name}
@@ -53,9 +54,15 @@ const EditUserInfoPage = () => {
       </div>
       <div className={style["field"]}>
         <label htmlFor="email">이메일</label>
-        <InputText id="email" type="text" value={userInfo.email} disabled />
+        <InputText
+          style={{ width: "100%" }}
+          id="email"
+          type="text"
+          value={userInfo.email}
+          disabled
+        />
       </div>
-      <div className={style["field"]}>
+      {/* <div className={style["field"]}>
         <label htmlFor="password">비밀번호</label>
         <InputText
           id="password"
@@ -63,7 +70,7 @@ const EditUserInfoPage = () => {
           value={userInfo.password}
           onChange={(e) => handleUserInfoChange("password", e.target.value)}
         />
-      </div>
+      </div> */}
 
       <div className={style["buttonContainer"]}>
         <Button label="저장" onClick={handleSaveUserInfo} />

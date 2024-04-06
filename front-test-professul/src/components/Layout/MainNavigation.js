@@ -6,7 +6,6 @@ import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button"; // Button 컴포넌트를 import 합니다.
 import { useSelector, useDispatch } from "react-redux";
 import { handleLogout } from "../../util/logout";
-import { logout } from "../../redux/slices/authSlice";
 export default function MainHeader() {
   const isLoggedIn = useSelector((state) => state.auth?.isLoggedIn);
   const userRole = useSelector((state) => state.auth.user?.role);
@@ -15,21 +14,35 @@ export default function MainHeader() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const userName = useSelector((state) => state.auth.user?.name);
+
   const isMainPage = location.pathname === "/";
 
-  const items = isMainPage
-    ? []
-    : [{ label: "Home", icon: "pi pi-home", url: "/" }]; // 메인 페이지가 아니면 홈 버튼만 표시
+  // const items = isMainPage
+  //   ? []
+  //   : [{ label: "Home", icon: "pi pi-home", url: "/", key: "home" }]; // 메인 페이지가 아니면 홈 버튼만 표시
 
-  if (isLoggedIn && userRole === "ROLE_ADMIN") {
-    items.push({
-      label: "Admin",
-      icon: "pi pi-cog",
-      command: () => {
-        navigate("/admin");
-      },
-    });
-  }
+  // if (isLoggedIn && userRole === "ROLE_ADMIN") {
+  //   items.push({
+  //     label: "Admin",
+  //     icon: "pi pi-cog",
+  //     command: () => {
+  //       navigate("/admin");
+  //     },
+  //     key: "admin",
+  //   });
+  // }
+  const baseMenuItems = [
+    { label: "Home", icon: "pi pi-home", url: "/", key: "home" },
+  ];
+
+  const menuItems = [
+    ...baseMenuItems.map((item) => ({ ...item, key: item.label })),
+    ...(isLoggedIn && userRole === "ROLE_ADMIN"
+      ? [{ label: "Admin", icon: "pi pi-cog", url: "/admin", key: "admin" }]
+      : []),
+  ];
+
+  const items = menuItems;
 
   const handleLogoutClick = async () => {
     await handleLogout(dispatch);

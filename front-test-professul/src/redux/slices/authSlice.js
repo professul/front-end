@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../api/config";
-import { getCookie, removeCookie, setCookie } from "../../api/cookie";
+import { removeCookie, setCookie } from "../../api/cookie";
 import {
   login as loginApi,
   updateUserInfo as updateUserInfoApi,
@@ -95,7 +94,11 @@ const authSlice = createSlice({
       })
       .addCase(updateUserInfo.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload; // 업데이트된 사용자 정보로 상태 업데이트
+        // 기존 state.user의 정보를 유지하면서 action.payload로부터 받은 정보만 업데이트
+        state.user = {
+          ...state.user,
+          ...action.payload,
+        };
       })
       .addCase(updateUserInfo.rejected, (state, action) => {
         state.isLoading = false;
