@@ -39,7 +39,7 @@ function App() {
           <Route path="/edit-user-info" element={<EditUserInfoPage />} />
           <Route path="/confirm-user-info" element={<ConfirmUserInfoPage />} />
           <Route path="admin/*" element={<AdminPage />} />
-          <Route path="professor" element={<ProfList />} />
+          <Route path="review/list" element={<ProfList />} />
           <Route path="professor/review" element={<ReviewContent />} />
           <Route path="rating" element={<Rate />} />
           <Route path="professor/compare" element={<Compare />} />

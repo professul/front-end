@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import style from "./ProfList.module.css";
+import axios from 'axios';
 
 import "primeicons/primeicons.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
@@ -9,32 +10,31 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 
 const ProfList = () => {
-  const searchList = [
-    {
-      이름: "김연수",
-      학교: "서울대학교",
-      "학과/학부": "경영학과",
-      평점: 4.5,
-      리뷰: "10개",
-    },
-    {
-      이름: "홍길동",
-      학교: "한양대학교",
-      "학과/학부": "기계공학과",
-      평점: 3.8,
-      리뷰: "5개",
-    },
-  ];
+  const baseUrl = "http://localhost:8080";
+  const [professors, setProfessors] = useState([]);
+
+  useEffect(() => {
+    fetchProfessors();
+  }, []);
+
+  const fetchProfessors = async () => {
+    try {
+      const response = await axios.get(baseUrl + '/review/list');
+      setProfessors(response.data);
+    } catch (error) {
+      console.error("교수 목록을 가져오는 데 실패했습니다.", error);
+    }
+  };
+
   return (
     <div>
-      <p className={style.center}>'ㅇㅇㅇ' 검색결과 00건</p>
+      <p className={style.center}>{`검색결과 ${professors.length}건`}</p>
       <div className={`${style.listTable} ${style.marginCenter}`}>
-        <DataTable value={searchList}>
-          <Column field="이름" header="이름"></Column>
-          <Column field="학교" header="학교"></Column>
-          <Column field="학과/학부" header="학과/학부"></Column>
-          <Column field="평점" header="평점"></Column>
-          <Column field="리뷰" header="리뷰"></Column>
+        <DataTable value={professors}>
+          <Column field="profName" header="이름"></Column>
+          <Column field="univName" header="학교"></Column>
+          <Column field="deptName" header="학과/학부"></Column>
+          <Column field="rating" header="평점"></Column>
         </DataTable>
       </div>
     </div>
