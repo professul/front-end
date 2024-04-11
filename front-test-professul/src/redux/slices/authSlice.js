@@ -24,10 +24,7 @@ export const loginUser = createAsyncThunk(
         return { userId, email, role, name, access };
       }
     } catch (error) {
-      return rejectWithValue(
-        error.response.data.message ||
-          "로그인에 실패했습니다. 다시 시도해주세요."
-      );
+      return rejectWithValue("로그인 정보를 확인 후 다시 시도해주세요.");
     }
   }
 );
