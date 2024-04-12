@@ -22,6 +22,7 @@ import AdminPage from "./pages/Admin/Admin";
 import PasswordCheckPage from "./pages/MyPages/PasswordCheckPage";
 import EditUserInfoPage from "./pages/MyPages/EditUserInfoPage";
 import ConfirmUserInfoPage from "./pages/MyPages/ConfirmUserInfoPage";
+import PasswordChangePage from "./pages/MyPages/PasswordChangePage";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           </Route>
           <Route path="/password-check" element={<PasswordCheckPage />} />
           <Route path="/edit-user-info" element={<EditUserInfoPage />} />
+          <Route path="/password-change" element={<PasswordChangePage />} />
           <Route path="/confirm-user-info" element={<ConfirmUserInfoPage />} />
           <Route path="admin/*" element={<AdminPage />} />
           <Route path="review/list" element={<ProfList />} />

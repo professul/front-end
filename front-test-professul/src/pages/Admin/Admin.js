@@ -22,7 +22,6 @@ const AdminPage = () => {
 
   // 액션을 수행하는 함수
   const handleAction = (report) => {
-    // 여기에 액션을 수행하는 코드를 추가
     console.log("Taking action for report:", report);
   };
 
