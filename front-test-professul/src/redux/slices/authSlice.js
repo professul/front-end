@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { removeCookie, setCookie } from "../../api/cookie";
 import {
+  changeUserPassword,
   login as loginApi,
   updateUserInfo as updateUserInfoApi,
 } from "../../api/auth";
@@ -45,6 +46,25 @@ export const updateUserInfo = createAsyncThunk(
   }
 );
 
+export const updatePassword = createAsyncThunk(
+  "auth/updatePassword",
+  async (
+    { currentPassword, newPassword, confirmPassword },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await changeUserPassword(
+        currentPassword,
+        newPassword,
+        confirmPassword
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   user: {},
   accessToken: null,
@@ -64,7 +84,11 @@ const authSlice = createSlice({
     //로그아웃 액션
     logout: (state) => {
       // 로그아웃 시 상태를 initialState로 초기화
-      Object.assign(state, initialState);
+      state.accessToken = null;
+      state.isLoggedIn = false;
+      state.isLoading = false;
+      state.error = null;
+      state.user = {};
       localStorage.removeItem("access");
       removeCookie("refresh");
     },
@@ -100,6 +124,18 @@ const authSlice = createSlice({
       .addCase(updateUserInfo.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+      .addCase(updatePassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.accessToken = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
+      })
+      .addCase(updatePassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(updatePassword.pending, (state, action) => {
+        state.isLoading = true;
       });
   },
 });

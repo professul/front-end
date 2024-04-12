@@ -32,9 +32,14 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // Access Token 만료 시
+    if (error.response.status === 403) {
+      console.log("쿠키가 없어 로그인이 필요합니다");
+      store.dispatch(logout);
+      window.location.href = "/login";
+      return Promise.reject(error);
+    }
+    // Access Token 만료 시 401 Unauthorized
     if (error.response.status === 401 && !originalRequest._retry) {
-      //토큰 만료
       originalRequest._retry = true;
 
       try {
@@ -60,9 +65,6 @@ api.interceptors.response.use(
           originalRequest.headers["access"] = accessToken;
 
           return api.request(originalRequest);
-        } else {
-          //로그인 실패 시 로그인 페이지로 리다이렉션
-          window.location.href = "/login";
         }
       } catch (err) {
         console.log("에러 메시지:", err.message);
