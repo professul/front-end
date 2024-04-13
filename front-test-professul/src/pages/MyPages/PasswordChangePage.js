@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { Toast } from "primereact/toast";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,6 +12,7 @@ const PasswordChangePage = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const user = useSelector((state) => state.auth.user);
+  const toast = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -27,15 +29,32 @@ const PasswordChangePage = () => {
   };
 
   const handlePasswordChange = () => {
+    if (newPassword !== confirmPassword) {
+      toast.current.show({
+        severity: "error",
+        summary: "비밀번호 불일치",
+        detail: "비밀번호가 일치하지 않습니다",
+        life: 3000,
+      });
+      return;
+    }
+
     dispatch(updatePassword({ currentPassword, newPassword, confirmPassword }))
       .unwrap()
       .then(() => {
+        toast.current.show({
+          severity: "success",
+          summary: "성공",
+          detail: "비밀번호가 변경되었습니다.",
+          life: 3000,
+        });
         navigate("/");
       });
   };
 
   return (
     <div className={style["container"]}>
+      <Toast ref={toast} />
       <h2>비밀번호 변경</h2>
       <div className={style["field"]}>
         <InputText

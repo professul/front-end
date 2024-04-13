@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { UseDispatch, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { InputSwitch } from "primereact/inputswitch";
