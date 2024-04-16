@@ -2,9 +2,12 @@ import axios from "axios";
 import { store } from "../redux/store";
 import { setAccessToken } from "../redux/slices/authSlice";
 import { logout } from "../redux/slices/authSlice";
-// const dispatch = useDispatch();
+
+const backendPort = "8080";
+const serverUrl = "http://" + window.location.hostname + ":" + backendPort;
+
 const api = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: serverUrl,
   withCredentials: true, // 쿠키 전송을 위해 필요
 });
 

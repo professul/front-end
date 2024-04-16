@@ -5,6 +5,7 @@ import {
   login as loginApi,
   updateUserInfo as updateUserInfoApi,
 } from "../../api/auth";
+import { deleteUser } from "../../util/deleteUser";
 // 비동기 로그인 액션
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
@@ -58,6 +59,18 @@ export const updatePassword = createAsyncThunk(
         newPassword,
         confirmPassword
       );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const userWithdrawl = createAsyncThunk(
+  "auth/userWithdrawal",
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await deleteUser(userId);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -136,6 +149,16 @@ const authSlice = createSlice({
       })
       .addCase(updatePassword.pending, (state, action) => {
         state.isLoading = true;
+      })
+      .addCase(userWithdrawl.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(userWithdrawl.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(userWithdrawl.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
 });
