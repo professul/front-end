@@ -128,7 +128,6 @@ const authSlice = createSlice({
       })
       .addCase(updateUserInfo.fulfilled, (state, action) => {
         state.isLoading = false;
-        // 기존 state.user의 정보를 유지하면서 action.payload로부터 받은 정보만 업데이트
         state.user = {
           ...state.user,
           ...action.payload,
@@ -153,13 +152,17 @@ const authSlice = createSlice({
       .addCase(userWithdrawl.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(userWithdrawl.fulfilled, (state, action) => {
-        state.isLoading = false;
-      })
-      .addCase(userWithdrawl.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      });
+      .addCase(userWithdrawl.fulfilled, (state, action) => ({
+        ...state,
+        isLoading: false,
+        error: null,
+      }))
+
+      .addCase(userWithdrawl.rejected, (state, action) => ({
+        ...state,
+        isLoading: false,
+        error: action.payload ? action.payload.message : action.error.message,
+      }));
   },
 });
 
