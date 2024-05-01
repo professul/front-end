@@ -1,11 +1,11 @@
 import React from "react";
 import style from "./Home.module.css";
-
 import "primeicons/primeicons.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
-
 const options = [
   { label: "학교", value: "학교" },
   { label: "교수", value: "교수" },
@@ -14,12 +14,19 @@ const options = [
 const Home = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [selectedOption, setSelectedOption] = useState(options[0]);
+  const navigate = useNavigate();
+
   const handleSelectChange = (e) => {
     setSelectedOption(e.target.value);
   };
 
   const handleSearchChange = (e) => {
     setSearchKeyword(e.target.value);
+  };
+
+  const handleSearch = () => {
+    //검색 시 검색 결과 페이지로 이동
+    // navigate()
   };
   return (
     <>

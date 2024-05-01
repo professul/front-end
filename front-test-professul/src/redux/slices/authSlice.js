@@ -5,6 +5,7 @@ import {
   login as loginApi,
   updateUserInfo as updateUserInfoApi,
 } from "../../api/auth";
+import { deleteUser } from "../../util/deleteUser";
 // 비동기 로그인 액션
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
@@ -65,6 +66,18 @@ export const updatePassword = createAsyncThunk(
   }
 );
 
+export const userWithdrawl = createAsyncThunk(
+  "auth/userWithdrawal",
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await deleteUser(userId);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   user: {},
   accessToken: null,
@@ -115,7 +128,6 @@ const authSlice = createSlice({
       })
       .addCase(updateUserInfo.fulfilled, (state, action) => {
         state.isLoading = false;
-        // 기존 state.user의 정보를 유지하면서 action.payload로부터 받은 정보만 업데이트
         state.user = {
           ...state.user,
           ...action.payload,
@@ -136,7 +148,21 @@ const authSlice = createSlice({
       })
       .addCase(updatePassword.pending, (state, action) => {
         state.isLoading = true;
-      });
+      })
+      .addCase(userWithdrawl.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(userWithdrawl.fulfilled, (state, action) => ({
+        ...state,
+        isLoading: false,
+        error: null,
+      }))
+
+      .addCase(userWithdrawl.rejected, (state, action) => ({
+        ...state,
+        isLoading: false,
+        error: action.payload ? action.payload.message : action.error.message,
+      }));
   },
 });
 

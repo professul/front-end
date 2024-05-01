@@ -15,3 +15,24 @@ export const validateSignUpForm = (values) => {
   }
   return errors;
 };
+
+export const validatePasswordChange = (
+  currentPassword,
+  newPassword,
+  confirmPassword
+) => {
+  const errors = {};
+  if (!newPassword) {
+    errors.newPassword = "새 비밀번호를 입력해주세요.";
+  } else if (newPassword.length < 6) {
+    errors.newPassword = "비밀번호는 6자 이상이어야 합니다.";
+  }
+
+  if (!confirmPassword) {
+    errors.confirmPassword = "새 비밀번호 확인을 입력해주세요.";
+  } else if (newPassword !== confirmPassword) {
+    errors.confirmPassword = "비밀번호가 일치하지 않습니다.";
+  }
+
+  return errors;
+};
