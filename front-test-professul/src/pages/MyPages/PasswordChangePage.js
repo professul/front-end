@@ -36,6 +36,16 @@ const PasswordChangePage = () => {
       confirmPassword
     );
 
+    if (newPassword === currentPassword) {
+      toast.current.show({
+        severity: "error",
+        summary: "비밀번호 오류",
+        detail: "새 비밀번호는 현재 비밀번호와 다르게 설정해야 합니다.",
+        life: 3000,
+      });
+      return;
+    }
+
     if (newPassword !== confirmPassword) {
       toast.current.show({
         severity: "error",

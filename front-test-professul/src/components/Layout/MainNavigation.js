@@ -76,11 +76,7 @@ export default function MainHeader() {
           </>
         )
       ) : (
-        <InputText
-          placeholder="Search"
-          type="text"
-          className="w-8rem sm:w-auto"
-        />
+        <InputText placeholder="Search" type="text" className="search" />
       )}
     </React.Fragment>
   );
