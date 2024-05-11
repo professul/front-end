@@ -5,8 +5,8 @@ import { Button } from "primereact/button";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import style from "./PasswordChangePage.module.css";
-import { updatePassword } from "../../redux/slices/authSlice";
-import { validatePasswordChange } from "../../util/validate";
+import { updatePassword } from "../../../redux/slices/authSlice";
+import { validatePasswordChange } from "../../../util/validate";
 
 const PasswordChangePage = () => {
   const [currentPassword, setCurrentPassword] = useState("");

@@ -22,9 +22,7 @@ export const signUpSlice = createSlice({
     isLoading: false,
     error: null,
   },
-  reducers: {
-    // 필요한 추가 리듀서 정의
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(signUp.pending, (state) => {

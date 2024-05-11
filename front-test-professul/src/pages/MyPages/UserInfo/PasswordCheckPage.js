@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import style from "./PasswordCheckPage.module.css";
-import api from "../../api/config";
+import api from "../../../api/config";
 const PasswordCheckPage = () => {
   const [password, setPassword] = useState("");
   const user = useSelector((state) => state.auth.user);
