@@ -1,38 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { TabPanel } from "primereact/tabview";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 const ReviewManagementTab = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
+  // const dispatch = useDispatch();
+  // const user = useSelector((state) => state.auth.user);
+  // const reviews = useSelector((state) => state.review.reviews);
 
-  const [page, setPage] = useState([]);
-  const [pageInfo, setPageInfo] = useState({
-    allPage: 0,
-    curPage: 0,
-    startPage: null,
-    endPage: null,
-  });
+  // const [page, setPage] = useState([]);
+  // const [pageInfo, setPageInfo] = useState({
+  //   allPage: 0,
+  //   curPage: 0,
+  //   startPage: null,
+  //   endPage: null,
+  // });
 
-  const fetchReviews = async (page) => {
-    const exampleReviews = [
-      { id: 1, content: "리뷰 1" },
-      { id: 2, content: "리뷰 2" },
-    ];
-    const examplePageInfo = {
-      allPage: 5,
-      curPage: page,
-      startPage: 1,
-      endPage: 5,
-    };
+  // useEffect(() => {
+  //   // 리뷰를 가져오는 비동기 액션을 dispatch 합니다.
+  //   dispatch(fetchReviews(pageInfo.curPage));
+  // }, [dispatch, pageInfo.curPage]);
 
-    setReviews(exampleReviews);
-    setPageInfo(examplePageInfo);
-  };
-
-  useEffect(() => {
-    fetchReviews(pageInfo.curPage);
-  }, [pageInfo.curPage]);
+  // useEffect(() => {
+  //   fetchReviews(pageInfo.curPage);
+  // }, [pageInfo.curPage]);
 
   return (
     <div>

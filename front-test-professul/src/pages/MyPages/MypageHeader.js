@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TabView, TabPanel } from "primereact/tabview";
-import ReviewManagementTab from "./ReviewManagementTab";
-import UserInfoTab from "./UserInfoTab";
+import ReviewManagementTab from "./MyReviews/ReviewManagementTab";
+import UserInfoTab from "./UserInfo/UserInfoTab";
 import { useNavigate } from "react-router-dom";
 
 const MypageHeader = () => {
