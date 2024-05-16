@@ -3,7 +3,8 @@ import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateUserInfo } from "../../redux/slices/authSlice";
+// import { updateUserInfo } from "../../../api/auth";
+import { updateUserInfo } from "../../../redux/slices/authSlice";
 import style from "./EditUserInfoPage.module.css";
 
 const EditUserInfoPage = () => {

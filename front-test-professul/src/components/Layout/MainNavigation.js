@@ -6,6 +6,8 @@ import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button"; // Button 컴포넌트를 import 합니다.
 import { useSelector, useDispatch } from "react-redux";
 import { handleLogout } from "../../util/logout";
+import logo from "../../assets/logo.png";
+
 export default function MainHeader() {
   const isLoggedIn = useSelector((state) => state.auth?.isLoggedIn);
   const userRole = useSelector((state) => state.auth.user?.role);
@@ -17,20 +19,6 @@ export default function MainHeader() {
 
   const isMainPage = location.pathname === "/";
 
-  // const items = isMainPage
-  //   ? []
-  //   : [{ label: "Home", icon: "pi pi-home", url: "/", key: "home" }]; // 메인 페이지가 아니면 홈 버튼만 표시
-
-  // if (isLoggedIn && userRole === "ROLE_ADMIN") {
-  //   items.push({
-  //     label: "Admin",
-  //     icon: "pi pi-cog",
-  //     command: () => {
-  //       navigate("/admin");
-  //     },
-  //     key: "admin",
-  //   });
-  // }
   const baseMenuItems = [
     { label: "Home", icon: "pi pi-home", url: "/", key: "home" },
   ];
@@ -48,7 +36,9 @@ export default function MainHeader() {
     await handleLogout(dispatch);
     navigate("/");
   };
-  const start = <img alt="logo" height="40" className="mr-2"></img>;
+  const start = (
+    <img src={logo} alt="logo" height="60" width="70" className="mr-2"></img>
+  );
 
   const end = (
     <React.Fragment>
@@ -86,11 +76,7 @@ export default function MainHeader() {
           </>
         )
       ) : (
-        <InputText
-          placeholder="Search"
-          type="text"
-          className="w-8rem sm:w-auto"
-        />
+        <InputText placeholder="Search" type="text" className="search" />
       )}
     </React.Fragment>
   );

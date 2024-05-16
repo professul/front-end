@@ -5,8 +5,8 @@ import { Button } from "primereact/button";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import style from "./PasswordChangePage.module.css";
-import { updatePassword } from "../../redux/slices/authSlice";
-import { validatePasswordChange } from "../../util/validate";
+import { updatePassword } from "../../../redux/slices/authSlice";
+import { validatePasswordChange } from "../../../util/validate";
 
 const PasswordChangePage = () => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -35,6 +35,16 @@ const PasswordChangePage = () => {
       newPassword,
       confirmPassword
     );
+
+    if (newPassword === currentPassword) {
+      toast.current.show({
+        severity: "error",
+        summary: "비밀번호 오류",
+        detail: "새 비밀번호는 현재 비밀번호와 다르게 설정해야 합니다.",
+        life: 3000,
+      });
+      return;
+    }
 
     if (newPassword !== confirmPassword) {
       toast.current.show({

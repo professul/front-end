@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { useSelector, useDispatch } from "react-redux";
 import style from "./UserInfoTab.module.css";
-import { logout, userWithdrawl } from "../../redux/slices/authSlice";
+import { logout, userWithdrawl } from "../../../redux/slices/authSlice";
 const UserInfoTab = () => {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();

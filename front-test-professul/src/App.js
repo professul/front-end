@@ -16,13 +16,13 @@ import Compare from "./pages/Compare/Compare";
 import SignUp from "./pages/SignUp/Signup";
 import LoginForm from "./pages/Login/Login";
 import MypageHeader from "./pages/MyPages/MypageHeader";
-import ReviewManagementTab from "./pages/MyPages/ReviewManagementTab";
-import UserInfoTab from "./pages/MyPages/UserInfoTab";
+import ReviewManagementTab from "./pages/MyPages/MyReviews/ReviewManagementTab";
+import UserInfoTab from "./pages/MyPages/UserInfo/UserInfoTab";
 import AdminPage from "./pages/Admin/Admin";
-import PasswordCheckPage from "./pages/MyPages/PasswordCheckPage";
-import EditUserInfoPage from "./pages/MyPages/EditUserInfoPage";
-import ConfirmUserInfoPage from "./pages/MyPages/ConfirmUserInfoPage";
-import PasswordChangePage from "./pages/MyPages/PasswordChangePage";
+import PasswordCheckPage from "./pages/MyPages/UserInfo/PasswordCheckPage";
+import EditUserInfoPage from "./pages/MyPages/UserInfo/EditUserInfoPage";
+import ConfirmUserInfoPage from "./pages/MyPages/UserInfo/ConfirmUserInfoPage";
+import PasswordChangePage from "./pages/MyPages/UserInfo/PasswordChangePage";
 
 function App() {
   return (
