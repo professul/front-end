@@ -10,6 +10,7 @@ const SignUp = () => {
   const { isLoading, error } = useSelector((state) => state.auth);
   const [showMessage, setShowMessage] = useState(false);
   const [formData, setFormData] = useState({});
+  const [errorMessage, setErrorMessage] = useState(""); // 오류 메시지 상태 추가
   const navigate = useNavigate();
   const onSubmit = useCallback(
     async (data, form) => {
@@ -18,8 +19,10 @@ const SignUp = () => {
         setFormData(data); // 사용자가 입력한 데이터를 상태에 저장
         setShowMessage(true); // 성공 메시지 표시
         form.restart(); // 폼 초기화는 성공 후에 수행
+        setErrorMessage(""); // 오류 메시지 초기화
       } catch (err) {
         console.error("회원가입 실패:", err);
+        setErrorMessage(err || "회원가입 중 오류가 발생했습니다."); // 오류 메시지 설정
       }
     },
     [dispatch]
@@ -57,6 +60,9 @@ const SignUp = () => {
         <div className={style["card"]}>
           <h2>회원가입</h2>
           <SignUpForm onSubmit={onSubmit} />
+          {errorMessage && ( // 오류 메시지 표시
+            <div className={style["error-message"]}>{errorMessage}</div>
+          )}
         </div>
       </div>
     </div>
