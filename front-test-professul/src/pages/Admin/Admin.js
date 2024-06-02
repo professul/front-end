@@ -13,6 +13,14 @@ const AdminPage = () => {
   const { reports, selectedReports, loading, error } = useSelector(
     (state) => state.reports
   );
+  const handleSuspend = (userId) => {
+    dispatch(suspendUser(userId));
+  };
+
+  const handleBan = (userId) => {
+    dispatch(banUser(userId));
+  };
+
   useEffect(() => {
     dispatch(getReports());
   }, [dispatch]);
