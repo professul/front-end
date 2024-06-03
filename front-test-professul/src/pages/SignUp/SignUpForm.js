@@ -45,7 +45,7 @@ const SignUpForm = ({ onSubmit }) => {
           <Field
             name="name"
             render={({ input, meta }) => (
-              <div className={style["field"]}>
+              <div className={style["fields"]}>
                 <span className="p-float-label">
                   <InputText
                     id="name"
@@ -71,7 +71,7 @@ const SignUpForm = ({ onSubmit }) => {
           <Field
             name="email"
             render={({ input, meta }) => (
-              <div className={style["field"]}>
+              <div className={style["fields"]}>
                 <span className="p-float-label p-input-icon-right">
                   <i className="pi pi-envelope" />
                   <InputText
@@ -97,7 +97,7 @@ const SignUpForm = ({ onSubmit }) => {
           <Field
             name="password"
             render={({ input, meta }) => (
-              <div className={style["field"]}>
+              <div className={style["fields"]}>
                 <span className="p-float-label">
                   <Password
                     id="password"
@@ -125,8 +125,8 @@ const SignUpForm = ({ onSubmit }) => {
           <Field
             name="confirmPassword"
             render={({ input, meta }) => (
-              <div className={style["field"]}>
-                <span className="p-float-label">
+              <div className={style["fields"]}>
+                <span className="p-float-label p-input-icon-right">
                   <Password
                     id="confirmPassword"
                     {...input}
@@ -135,6 +135,7 @@ const SignUpForm = ({ onSubmit }) => {
                       "p-invalid": isFormFieldValid(meta),
                     })}
                     header={<h6>Confirm Password</h6>}
+                    inputStyle={{ paddingLeft: "1rem" }}
                   />
                   <label
                     htmlFor="confirmPassword"
