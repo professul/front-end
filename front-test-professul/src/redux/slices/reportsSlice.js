@@ -9,7 +9,32 @@ const initialState = {
 
 export const getReports = createAsyncThunk("reports/getReports", async () => {
   const response = await api.get("/admin");
+  return response.data;
 });
+
+export const suspendUser = createAsyncThunk(
+  "reports/suspendUser",
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await api.post(`/admin/suspend`, { userId });
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const banUser = createAsyncThunk(
+  "reports/banUser",
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await api.post(`/admin/ban`, { userId });
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 //슬라이스 생성
 const reportsSlice = createSlice({

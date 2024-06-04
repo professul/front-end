@@ -7,48 +7,116 @@ import { Button } from "primereact/button";
 import {
   getReports,
   setSelectedReports,
+  suspendUser,
+  banUser,
 } from "../../redux/slices/reportsSlice";
+import style from "./Admin.module.css";
+
 const AdminPage = () => {
   const dispatch = useDispatch();
   const { reports, selectedReports, loading, error } = useSelector(
     (state) => state.reports
   );
+  const handleSuspend = (userId) => {
+    dispatch(suspendUser(userId));
+  };
+
+  const handleBan = (userId) => {
+    dispatch(banUser(userId));
+  };
+
+  // const [selectedReports, setSelectedReports] = useState([]);
+  const [rowClick, setRowClick] = useState(true); // 행 클릭 여부를 관리할 상태
+  const handleRowClick = (e) => {
+    setRowClick(!rowClick);
+  };
+
   useEffect(() => {
     dispatch(getReports());
   }, [dispatch]);
-
-  // const [selectedReports, setSelectedReports] = useState(null); // 선택된 신고들을 관리할 상태
-  const [rowClick, setRowClick] = useState(true); // 행 클릭 여부를 관리할 상태
 
   // 액션을 수행하는 함수
   const handleAction = (report) => {
     console.log("Taking action for report:", report);
   };
 
-  const actionBodyTemplate = (rowData) => {
+  const ActionButtons = ({ rowData }) => {
+    const dispatch = useDispatch();
+
+    const handleSuspend = () => {
+      dispatch(suspendUser(rowData.id));
+    };
+
+    const handleBan = () => {
+      dispatch(banUser(rowData.id));
+    };
+
+    const handleAction = () => {
+      console.log("Taking action for report:", rowData);
+    };
+
     return (
-      <Button
-        onClick={() => handleAction(rowData)}
-        icon="pi pi-ban"
-        className="p-button-danger"
-        tooltip="Take Action"
-      />
+      <>
+        {/* <Button
+          onClick={handleSuspend}
+          icon="pi pi-user-minus"
+          className="p-button-warning"
+          tooltip="Suspend User"
+        />
+        <Button
+          onClick={handleBan}
+          icon="pi pi-times"
+          className="p-button-danger"
+          tooltip="Ban User"
+          style={{ marginLeft: "10px" }}
+        /> */}
+        <Button
+          onClick={handleAction}
+          icon="pi pi-ban"
+          className="p-button-danger"
+          tooltip="Take Action"
+        />
+      </>
     );
   };
+
+  const actionBodyTemplate = (rowData) => {
+    return <ActionButtons rowData={rowData} />;
+  };
+  const tempReports = [
+    {
+      id: 1,
+      reviewId: "123",
+      reporter: "John Doe",
+      reportedUser: "Jane Smith",
+      reason: "Inappropriate content",
+      date: "2023-05-01",
+    },
+    {
+      id: 2,
+      reviewId: "456",
+      reporter: "Bob Johnson",
+      reportedUser: "Alice Williams",
+      reason: "Spam",
+      date: "2023-05-02",
+    },
+  ];
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="card">
+    <div className={style["card"]}>
       <div className="flex justify-content-center align-items-center mb-4 gap-2"></div>
       <DataTable
-        value={reports}
+        // value={reports}
+        value={tempReports}
         selectionMode="checkbox"
         selection={selectedReports}
         onSelectionChange={(e) => dispatch(setSelectedReports(e.value))}
         dataKey="id"
         tableStyle={{ minWidth: "50rem" }}
+        onRowClick={handleRowClick}
       >
         <Column
           selectionMode="multiple"
